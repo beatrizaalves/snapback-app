@@ -1,0 +1,448 @@
+import type { AppState } from '../types'
+
+export const DEMO_PIN = '1234'
+export const DEMO_CODE = '123456'
+export const SYSTEM_MAX_INTENSITY = 3 as const
+export const LOCK_MS = 60_000
+export const IDLE_MS = 10 * 60 * 1000
+export const MIN_BATTERY = 30
+
+export function createSeed(): AppState {
+  return {
+    auth: {
+      role: null,
+      onboarded: true,
+      verified: true,
+      registered: true,
+      pinAttempts: 0,
+      lockedUntil: null,
+    },
+    profile: {
+      name: 'Maria Aparecida',
+      email: 'maria.aparecida@email.com',
+      phone: '(19) 98888-1212',
+      city: 'Campinas-SP',
+      age: 67,
+      weight: 68,
+      height: 158,
+      footSize: 37,
+      pin: DEMO_PIN,
+    },
+    consents: {
+      gaitAnalysis: true,
+      sharePhysio: true,
+      fallFamily: true,
+      anonymousImprove: false,
+      acceptedAt: '2026-10-02T14:00:00.000Z',
+    },
+    a11y: {
+      largeText: false,
+      highContrast: false,
+      readAloud: false,
+      simpleMode: false,
+      fontScale: 1,
+      vibrationAlerts: true,
+      notificationAlerts: true,
+      healthConnect: false,
+    },
+    insoles: {
+      left: { battery: 78, connected: true, lastSync: '2026-11-19T11:40:00.000Z' },
+      right: { battery: 18, connected: true, lastSync: '2026-11-19T11:40:00.000Z' },
+      lifespanMonths: 8,
+      firmwareCurrent: '1.3.8',
+      firmwareAvailable: '1.4.2',
+      firmwareStatus: 'idle',
+      updateProgress: 0,
+    },
+    assessment: {
+      completed: true,
+      gait: 'pronada',
+      baselineBalance: 68,
+      balance: 72,
+      weightLeft: 55,
+      weightRight: 45,
+      steps: 186,
+      completedAt: '2026-10-02T15:10:00.000Z',
+      regions: ['Joelho esquerdo', 'Lombar'],
+    },
+    pain: [
+      {
+        id: 'pain-1',
+        date: '2026-11-18T20:10:00.000Z',
+        intensity: 4,
+        regions: ['Joelho esquerdo', 'Lombar'],
+        note: 'Desconforto ao final da caminhada da tarde.',
+      },
+      {
+        id: 'pain-2',
+        date: '2026-11-12T19:00:00.000Z',
+        intensity: 6,
+        regions: ['Joelho esquerdo'],
+        note: 'Dor ao subir a calçada.',
+      },
+      {
+        id: 'pain-3',
+        date: '2026-10-20T18:30:00.000Z',
+        intensity: 7,
+        regions: ['Lombar', 'Joelho esquerdo'],
+        note: 'Primeira semana de uso.',
+      },
+    ],
+    exercises: [
+      {
+        id: 'ex-1',
+        title: 'Apoio em um pé só',
+        category: 'equilibrio',
+        durationMin: 5,
+        difficulty: 'Médio',
+        inPlan: true,
+        done: true,
+        safety: 'Segure uma cadeira. Pare se sentir tontura.',
+        steps: [
+          'Fique ao lado de uma cadeira firme.',
+          'Apoie as duas mãos no encosto.',
+          'Levante o pé direito por 10 segundos.',
+          'Repita com o pé esquerdo, três vezes de cada lado.',
+        ],
+      },
+      {
+        id: 'ex-2',
+        title: 'Marcha no lugar',
+        category: 'equilibrio',
+        durationMin: 4,
+        difficulty: 'Leve',
+        inPlan: true,
+        done: true,
+        safety: 'Olhe para a frente. Não feche os olhos.',
+        steps: [
+          'Fique em pé, com os pés na largura do quadril.',
+          'Eleve um joelho de cada vez, sem pressa.',
+          'Mantenha o tronco ereto.',
+          'Siga por quatro minutos, no seu ritmo.',
+        ],
+      },
+      {
+        id: 'ex-3',
+        title: 'Alinhar os joelhos',
+        category: 'postura',
+        durationMin: 6,
+        difficulty: 'Médio',
+        inPlan: true,
+        done: false,
+        safety: 'O joelho acompanha a ponta do pé. Não deixe cair para dentro.',
+        steps: [
+          'Sente-se e levante devagar, cinco vezes.',
+          'Observe se os joelhos apontam para a frente.',
+          'Se o joelho cair para dentro, reduza a amplitude.',
+          'Descanse 30 segundos entre as séries.',
+        ],
+      },
+      {
+        id: 'ex-4',
+        title: 'Elevação de panturrilha',
+        category: 'postura',
+        durationMin: 5,
+        difficulty: 'Leve',
+        inPlan: true,
+        done: false,
+        safety: 'Use o apoio das mãos. Não fique na ponta dos pés se sentir dor.',
+        steps: [
+          'Segure a cadeira.',
+          'Suba nas pontas dos pés.',
+          'Desça devagar até o calcanhar encostar.',
+          'Repita dez vezes.',
+        ],
+      },
+      {
+        id: 'ex-5',
+        title: 'Alongar a panturrilha',
+        category: 'alongamento',
+        durationMin: 4,
+        difficulty: 'Leve',
+        inPlan: false,
+        done: false,
+        safety: 'O alongamento é suave. Não force o joelho.',
+        steps: [
+          'Apoie as mãos na parede.',
+          'Uma perna fica atrás, com o calcanhar no chão.',
+          'Dobre levemente o joelho da frente.',
+          'Mantenha 20 segundos e troque de lado.',
+        ],
+      },
+      {
+        id: 'ex-6',
+        title: 'Alongar a parte de trás da coxa',
+        category: 'alongamento',
+        durationMin: 5,
+        difficulty: 'Leve',
+        inPlan: false,
+        done: false,
+        safety: 'Faça sentada se o equilíbrio estiver inseguro.',
+        steps: [
+          'Sente-se na beira de uma cadeira firme.',
+          'Estenda uma perna com o calcanhar no chão.',
+          'Incline o tronco só até sentir alongar.',
+          'Respire e troque de perna.',
+        ],
+      },
+    ],
+    reminders: [
+      { id: 'rem-1', title: 'Colocar a palmilha', time: '08:00', kind: 'uso', enabled: true },
+      { id: 'rem-2', title: 'Exercícios da semana', time: '17:30', kind: 'exercicio', enabled: true },
+      { id: 'rem-3', title: 'Registrar a dor', time: '20:00', kind: 'dor', enabled: false },
+      { id: 'rem-4', title: 'Verificar a bateria', time: '21:00', kind: 'bateria', enabled: true },
+    ],
+    workouts: [
+      {
+        id: 'wk-1',
+        mode: 'caminhada',
+        durationSec: 18 * 60,
+        distanceKm: 1.2,
+        cadence: 98,
+        contactMs: 286,
+        date: '2026-11-17T10:00:00.000Z',
+        series: [96, 98, 97, 100, 99, 98, 101, 97].map((cadence, index) => ({
+          label: `${index + 1}`,
+          cadence,
+        })),
+      },
+      {
+        id: 'wk-2',
+        mode: 'caminhada',
+        durationSec: 22 * 60,
+        distanceKm: 1.5,
+        cadence: 96,
+        contactMs: 292,
+        date: '2026-11-14T09:20:00.000Z',
+        series: [94, 95, 96, 97, 96, 95, 98, 96].map((cadence, index) => ({
+          label: `${index + 1}`,
+          cadence,
+        })),
+      },
+    ],
+    pendingWorkout: null,
+    contacts: [
+      {
+        id: 'ct-1',
+        name: 'João Aparecido',
+        relation: 'Filho',
+        phone: '19977773434',
+        allowFall: true,
+      },
+    ],
+    physio: {
+      status: 'active',
+      name: 'Helena Duarte',
+      specialty: 'Fisioterapia ortopédica',
+      clinic: 'Clínica Palma Campinas',
+      dailyGoalMin: 60,
+      maxIntensity: 2,
+      adjustments: [
+        {
+          id: 'adj-1',
+          date: '2026-11-12T13:00:00.000Z',
+          author: 'Helena Duarte',
+          dailyGoalMin: 60,
+          maxIntensity: 2,
+          note: 'Manter intensidade média nesta semana.',
+        },
+      ],
+    },
+    clinicPatients: [
+      {
+        id: 'maria',
+        name: 'Maria Aparecida',
+        age: 67,
+        professional: 'Helena Duarte',
+        gait: 'pronada',
+        evolution: 'melhorando',
+        lastRecord: '18/11/2026',
+        shared: true,
+      },
+      {
+        id: 'p2',
+        name: 'Lúcia Fernandes',
+        age: 71,
+        professional: 'Helena Duarte',
+        gait: 'neutra',
+        evolution: 'estavel',
+        lastRecord: '17/11/2026',
+        shared: true,
+      },
+      {
+        id: 'p3',
+        name: 'Antônio Ribeiro',
+        age: 74,
+        professional: 'Rafael Moura',
+        gait: 'supinada',
+        evolution: 'atencao',
+        lastRecord: '16/11/2026',
+        shared: true,
+      },
+      {
+        id: 'p4',
+        name: 'Sônia Prado',
+        age: 69,
+        professional: 'Helena Duarte',
+        gait: 'pronada',
+        evolution: 'melhorando',
+        lastRecord: '15/11/2026',
+        shared: true,
+      },
+      {
+        id: 'p5',
+        name: 'Paulo Nogueira',
+        age: 66,
+        professional: 'Rafael Moura',
+        gait: 'neutra',
+        evolution: 'estavel',
+        lastRecord: '10/11/2026',
+        shared: false,
+      },
+    ],
+    professionals: [
+      { id: 'pr1', name: 'Helena Duarte', specialty: 'Ortopedia', patients: 18 },
+      { id: 'pr2', name: 'Rafael Moura', specialty: 'Fisioterapia esportiva', patients: 12 },
+      { id: 'pr3', name: 'Camila Rocha', specialty: 'Gerontologia', patients: 11 },
+    ],
+    careAlerts: [
+      {
+        id: 'al-1',
+        patientId: 'maria',
+        patientName: 'Maria Aparecida',
+        title: 'Bateria baixa',
+        detail: 'Palmilha direita em 18%. Oriente a recarga.',
+        time: 'Hoje, 08:40',
+        read: false,
+      },
+      {
+        id: 'al-2',
+        patientId: 'maria',
+        patientName: 'Maria Aparecida',
+        title: 'Pisada com sobrecarga',
+        detail: 'Apoio maior no lado esquerdo durante a manhã.',
+        time: 'Hoje, 09:15',
+        read: false,
+      },
+      {
+        id: 'al-3',
+        patientId: 'p3',
+        patientName: 'Antônio Ribeiro',
+        title: 'Dor em alta',
+        detail: 'Último registro de dor: 8/10.',
+        time: 'Ontem, 19:05',
+        read: true,
+      },
+    ],
+    stimuli: { intensity: 2, paused: false, minutesUsed: 18 },
+    plan: {
+      week: 3,
+      totalWeeks: 12,
+      usageGoalHours: 7,
+      usageHours: 5 + 20 / 60,
+      balanceGoal: 80,
+      exerciseGoal: 4,
+      adjustedNote: 'Meta de equilíbrio ajustada de 75 para 80 depois da segunda semana.',
+    },
+    stepsToday: 3482,
+    usageLabel: '5h20',
+    streak: 5,
+    lastStreakDate: '2026-11-19',
+    alertLimit30: true,
+    lastGaitAlertAt: null,
+    seenAchievements: ['avaliacao', 'sequencia', 'dor', 'uso', 'semana'],
+    patientNotice: null,
+    fallResolved: false,
+    supportTickets: [
+      {
+        id: 'tk-1',
+        date: '2026-11-05T16:00:00.000Z',
+        topic: 'Dúvida sobre a limpeza da palmilha',
+        status: 'Concluído',
+      },
+    ],
+    rating: { stars: 0, comment: '', sent: false },
+    chat: [
+      {
+        from: 'system',
+        text: 'Este chat é uma simulação local. Nenhuma mensagem sai do navegador e não há atendente conectado.',
+      },
+    ],
+  }
+}
+
+export const FIRMWARE_NOTES = [
+  'Leitura de pressão mais estável ao caminhar devagar.',
+  'Aviso de bateria baixa com mais antecedência.',
+  'Ajuste fino do tempo de estímulo no nível médio.',
+]
+
+export const GAIT_COPY = {
+  neutra: {
+    title: 'Pisada neutra',
+    text: 'O pé apoia de forma distribuída, do calcanhar ao centro.',
+    effect: 'Em geral, o desgaste do calçado fica mais uniforme.',
+  },
+  pronada: {
+    title: 'Pisada pronada',
+    text: 'O pé inclina para dentro no meio do passo. É o padrão identificado na avaliação da Maria.',
+    effect: 'Pode sobrecarregar joelho e parte interna do pé ao longo do dia.',
+  },
+  supinada: {
+    title: 'Pisada supinada',
+    text: 'O pé inclina para fora e apoia mais a borda externa.',
+    effect: 'Pode reduzir o amortecimento e exigir mais do tornozelo.',
+  },
+} as const
+
+export const HELP_GUIDES = [
+  {
+    id: 'colocar',
+    title: 'Como colocar no calçado',
+    steps: [
+      'Retire a palmilha original do tênis, se ela for removível.',
+      'Encaixe a PalmAlign com os sensores virados para cima.',
+      'O lado marcado E fica no pé esquerdo. O lado D fica no direito.',
+      'O calcanhar da palmilha encosta no fundo do calçado.',
+    ],
+  },
+  {
+    id: 'limpar',
+    title: 'Como limpar',
+    steps: [
+      'Desligue as duas palmilhas.',
+      'Passe um pano úmido, sem mergulhar em água.',
+      'Não use álcool direto nos sensores.',
+      'Deixe secar à sombra antes de guardar.',
+    ],
+  },
+  {
+    id: 'recarregar',
+    title: 'Como recarregar',
+    steps: [
+      'Use o cabo que veio com o par.',
+      'Conecte as duas palmilhas ao estojo.',
+      'A luz do estojo pisca durante a carga.',
+      'Uma carga completa leva cerca de duas horas nesta simulação.',
+    ],
+  },
+]
+
+export const FAQ = [
+  {
+    q: 'A palmilha precisa de internet o tempo todo?',
+    a: 'Não. A caminhada fica registrada na palmilha e o aplicativo recebe os dados quando você sincroniza. Nesta versão, a sincronização é simulada no próprio navegador.',
+  },
+  {
+    q: 'Posso usar meia?',
+    a: 'Sim. Use uma meia lisa, sem costura grossa na sola, para não alterar o contato com os sensores.',
+  },
+  {
+    q: 'O que faço se uma palmilha não conectar?',
+    a: 'Confira se ela está carregada, perto do celular e se o Bluetooth do aparelho está ligado. Depois use Tentar novamente. Aqui o Bluetooth não é acessado de verdade.',
+  },
+  {
+    q: 'Quem vê meus dados?',
+    a: 'Somente as pessoas que você autorizar na tela de consentimento. Você pode revogar o acesso do fisioterapeuta quando quiser.',
+  },
+]

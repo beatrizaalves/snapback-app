@@ -1,0 +1,29 @@
+:root {
+  --blue: #596ab6;
+  --deep: #1f6ab4;
+  --cyan: #37a7d0;
+  --cream: #fffcf6;
+  --surface: #ffffff;
+  --lavender: #dee6f4;
+  --text: #4d4f50;
+  --muted: #6d7288;
+  --ok: #1e8a5c;
+  --danger: #e4726b;
+  --warn: #a9793c;
+  --radius: 16px;
+  --shadow: 0 8px 24px rgba(77, 79, 80, 0.08);
+  --nav-h: 88px;
+  --font-scale: 1;
+  color-scheme: light;
+}
+
+[data-contrast='high'] {
+  --muted: #4d4f50;
+}
+
+[data-contrast='high'] .card,
+[data-contrast='high'] .field input,
+[data-contrast='high'] .field textarea,
+[data-contrast='high'] .field select {
+  border: 2px solid var(--deep);
+}

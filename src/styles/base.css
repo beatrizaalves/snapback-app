@@ -1,0 +1,54 @@
+* { box-sizing: border-box; }
+
+html, body, #root { min-height: 100%; }
+
+html { font-size: 18px; }
+
+body {
+  margin: 0;
+  background: var(--lavender);
+  color: var(--text);
+  font-family: Inter, sans-serif;
+  line-height: 1.45;
+}
+
+h1, h2, h3, .brand, .metric-value {
+  font-family: "Exo 2", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--deep);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+h1 { font-size: 1.7rem; line-height: 1.15; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.2rem; color: var(--text); }
+
+p { margin: 0; }
+
+button, input, textarea, select, small { font: inherit; color: inherit; }
+
+button { cursor: pointer; }
+
+a { color: var(--deep); }
+
+img, svg { max-width: 100%; }
+
+:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+[data-simple='true'] .simple-hide { display: none; }
