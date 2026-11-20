@@ -25,6 +25,7 @@ npm run dev
 ```
 
 Abra o endereço que o Vite mostrar, em geral `http://localhost:5173`.
+Ou acesse o site: https://snapback-sandy.vercel.app/
 
 ## Como demonstrar
 
